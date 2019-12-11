@@ -21,7 +21,7 @@ public class SampleController {
     @PostMapping
     public String postItInRabbitMq(@RequestBody Employee employee) {
         System.out.println("employee from rest call = " + employee.toString());
-        emailChannel.publishMessage().send(MessageBuilder.withPayload(employee).build());
+        emailChannel.publishMessage().send(MessageBuilder.withPayload(employee).setHeader("type","email_sending").build());
         return "successfully published in topic";
     }
 }
